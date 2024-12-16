@@ -1,0 +1,4 @@
+.showcase-container {
+    background-color: var(--bs-info);
+    height: calc(100vh - 75px);
+}

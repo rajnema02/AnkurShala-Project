@@ -1,0 +1,9 @@
+.showcase-container {
+    background-image: url('/assets/images/join-in-bg.png');
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 190px);
+}
+/* select {
+    max-width: 320px;
+} */

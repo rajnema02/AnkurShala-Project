@@ -1,0 +1,157 @@
+<!-- modal for add/update Chapter -->
+<div class="modal fade" [ngClass]="{'show': isEdit}" id="addUpdateChapterModal" tabindex="-1"
+    aria-labelledby="addUpdateChapterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUpdateChapterModalLabel">{{ isEdit == 'Update' ? 'Update' : 'Add' }}
+                    Chapter
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="isEdit=undefined"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Class selection -->
+                            <div class="form-group mt-3">
+                                <label for="chapterClass" class="form-label">Class</label>
+                                <select id="chapterClass" class="form-control" [(ngModel)]="masterToAddOrEdit.class"
+                                    (change)="onClassChange($event)">
+                                    <option value="" disabled>Select a class</option>
+                                    <option *ngFor="let classItem of class" [value]="classItem._id">{{ classItem.name }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Subject selection -->
+                            <div class="form-group mt-3">
+                                <label for="chapterSubject" class="form-label">Subject</label>
+                                <select id="chapterSubject" class="form-control"
+                                    [(ngModel)]="masterToAddOrEdit.subject">
+                                    <option value="" disabled>Select a subject</option>
+                                    <option *ngFor="let subjectItem of subjectList" [value]="subjectItem._id">{{
+                                        subjectItem.name }}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="chapterName" class="form-label">Name</label>
+                                <input id="chapterName" class="form-control" [(ngModel)]="masterToAddOrEdit.name"
+                                    name="chapterName" type="text" placeholder="Name" />
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="chapterImage" class="form-label">Image</label>
+                                <input id="chapterImage" class="form-control"
+                                    name="chapterImage" type="file" (change)="onImageSelect($event)" accept="uploads/*"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="isEdit=undefined">Close</button>
+                <button *ngIf="isEdit == 'Add'" type="button" class="btn btn-primary" (click)="addNewItem()">
+                    Add
+                </button>
+                <button *ngIf="isEdit == 'Update'" type="button" class="btn btn-primary"
+                    (click)="editItem(masterToAddOrEditIndex)">
+                    Update
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chapter management -->
+<div class="row">
+    <div class="col-12 col-md">
+        <div class="row">
+            <div class="col">
+                <!-- Date time card -->
+                <div class="card bg-white">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <h2>
+                                {{masterName}} Management
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Chapters -->
+                        <div class="container">
+                            <!-- Add Chapter button -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                                        <div>
+                                            <button class="btn btn-primary w-100 w-md-auto" data-bs-toggle="modal"
+                                                data-bs-target="#addUpdateChapterModal" (click)="selectItemToAdd()">
+                                                <i class="fi fi-rr-add"></i>
+                                                <span class="ms-2">
+                                                    Add {{masterName}}
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chapter list -->
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <!-- Pagination Controls -->
+                                        <pagination-controls id="chapter_list" (pageChange)="p = $event; getData()">
+                                        </pagination-controls>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Class</th>
+                                                    <th>Subject</th>
+                                                    <th>Image</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let chapter of data | paginate: { id: 'chapter_list', itemsPerPage: limit, currentPage: p, totalItems: total }; let i = index">
+                                                    <td>{{ i + 1 }}</td>
+                                                    <td>{{ chapter.name }}</td>
+                                                    <td>{{ chapter.classDetails.name }}</td>
+                                                    <td>{{ chapter.subjectDetails.name }}</td>
+                                                    <td>
+                                                        <img *ngIf="chapter.image" [src]="'/api/files/download/'+chapter.image" alt="{{chapter.name}}" style="width: 100px; height: 100px;" />
+                                                        <span *ngIf="!chapter.image">No Image</span>
+                                                    </td>
+
+                                                    <td>
+                                                        <button class="btn btn-outline-primary btn-sm me-2"
+                                                            (click)="selectItemToEdit(i)">
+                                                            <i class="fi fi-rr-pencil"></i> Edit
+                                                        </button>
+                                                        <button class="btn btn-outline-danger btn-sm"
+                                                            (click)="deleteItem(i)">
+                                                            <i class="fi fi-rr-trash"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

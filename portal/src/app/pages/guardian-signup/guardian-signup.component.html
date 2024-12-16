@@ -1,0 +1,75 @@
+<div class="row" style="width: 100%; height: 100vh; display: flex;">
+    <div class="sec-1 col-md-8" style="background-color: rgb(0, 83, 138);">
+        <div class="part-1 text-white" style="margin-left: 12vw; position: relative;">
+            <div class="logo d-flex mt-3">
+                <a
+                    [routerLink]="['/']"
+                >
+                    <img style="margin-bottom: 3vh; height: 11vh; " src="assets/logos/logo-wide.png" alt="Ankurshala logo" />
+                </a>
+            </div>
+
+            <h1 style="margin-top: 26vh; font-size: 4vw;">Tell Us More</h1>
+            <h1 style="font-size: 4vw;">About You</h1>
+            <img id="img1" style="position: absolute; top: 104%; left: -23%; width: 38vw;"
+                src="assets/logos/undraw_Graduation_re_gthn-removebg-preview 1.png" alt="Graduation illustration" />
+        </div>
+        <div class="part-2">
+            <img id="img2" style="position: absolute; top: 1%; left: 41%; width: 32vw;"
+                src="assets/logos/Frame (27).png" alt="Certificate illustration" />
+        </div>
+    </div>
+
+    <div class="sec-2 col-md-4 d-flex flex-column align-items-center justify-content-center bg-white" style="height: 100vh;">
+        <div class="part-1 w-100 p-3" style="max-width: 400px;">
+            <div class="image text-center mb-3">
+                <img id="img3" class="animate__animated animate__fadeIn" style="height: 12vh;" src="assets/logos/undraw_Exams_re_4ios 1.png" alt="Student" />
+                <h3 style="font-size: 2.5rem;" class="">Guardian</h3>
+                <div>
+                    <nav class="selection-nav nav justify-content-center">
+                        <a class="nav-link" [routerLink]="['/student-signup']">Student</a>
+                        <a class="nav-link disabled" [routerLink]="['/guardian-signup']">Guardian</a>
+                        <a class="nav-link" [routerLink]="['/teacher-signup']">Teacher</a>
+                    </nav>
+                </div>
+            </div>
+            <h5 class="text-center" style="font-size: 1.5rem;">Sign Up</h5>
+            <div class="card-body p-5 pt-4">
+                <form class="animate__animated animate__fadeIn">
+                    <div class="form-group mb-3">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" class="form-control" name="fullName" id="fullName" required>
+                        <span class="invalid-feedback">Name is required</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email">Email/Mobile No.</label>
+                        <input type="email" class="form-control" name="email" id="email" autocomplete="email" required>
+                        <span class="invalid-feedback">Email is required</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password"
+                            autocomplete="current-password" required>
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"
+                            autocomplete="current-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-primary w-100 mt-3">Sign Up</button>
+                </form>
+                <span class="invalid-feedback">Please fill out all required fields</span>
+                <div class="mt-1">
+                    Already have an account? <a routerLink="/login" class="c-primary fw-bold">Log In</a>
+                </div>
+            </div>
+        </div>
+        <div class="part-3 d-flex align-items-center justify-content-evenly w-100 mt-3" id="footer">
+            <p class="text-secondary m-0">©2023 Ankurshala</p>
+            <p class="text-secondary m-0">Privacy</p>
+            <p class="text-secondary m-0">Cookie preferences</p>
+        </div>
+    </div>
+</div>

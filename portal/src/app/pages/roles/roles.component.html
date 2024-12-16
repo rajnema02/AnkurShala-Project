@@ -1,0 +1,143 @@
+<!-- modal for add/update -->
+<div class="modal fade" [ngClass]="{'show': isEdit}" id="addUpdateMasterModal" tabindex="-1"
+    aria-labelledby="addUpdateMasterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUpdateMasterModalLabel">{{ isEdit == 'Update' ? 'Update' : 'Add' }} {{masterName}}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="isEdit=undefined"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="masterName" class="form-label">Name</label>
+                                <input id="masterName" class="form-control" [(ngModel)]="masterToAddOrEdit.name"
+                                    name="masterName" type="text" placeholder="Name" />
+                            </div>
+                            <!-- Top Role -->
+                            <div class="form-group">
+                                <label for="topRole" class="form-label">Top Role</label>
+                                <select id="topRole" class="form-select" [(ngModel)]="masterToAddOrEdit.topRole"
+                                    name="topRole">
+                                    <option value="">Parent</option>
+                                    <option *ngFor="let item of roles" [value]="item._id" disabled="{{ item._id == masterToAddOrEdit._id ? 'disabled' : '' }}">{{item.name}}</option>
+                                </select>
+                            </div>
+                            <!-- Permissions -->
+                            <div class="form-group">
+                                <label for="permissions" class="form-label">Permissions</label>
+                                <!-- list of permissions -->
+                                <ul class="list-group">
+                                    <li
+                                        class="list-group-item"
+                                        *ngFor="let item of permissions"
+                                        [ngClass]="{'list-group-item-primary': masterToAddOrEdit?.permissions?.includes(item.PERMISSION_CODE)}"
+                                        (click)="togglePermission(item.PERMISSION_CODE)">
+                                        <i class="fi fi-rr-check" [ngClass]="{'text-primary': masterToAddOrEdit?.permissions?.includes(item.PERMISSION_CODE)}"></i>
+                                        {{ item.label }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="isEdit=undefined">Close</button>
+                <button *ngIf="isEdit == 'Add'" type="button" class="btn btn-primary" (click)="addNewItem()">
+                    Add
+                </button>
+                <button *ngIf="isEdit == 'Update'" type="button" class="btn btn-primary"
+                    (click)="editItem(masterToAddOrEditIndex)">
+                    Update
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- masters -->
+
+<div class="row">
+    <div class="col-12 col-md">
+        <div class="row">
+            <div class="col">
+                <!-- Date time card -->
+                <div class="card bg-white">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <h2>
+                                {{masterName}} Management
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Masters -->
+                        <div class="container">
+                            <!-- selectable chips/badges for masters -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                                        <div>
+                                            <button class="btn btn-primary w-100 w-md-auto" data-bs-toggle="modal"
+                                                data-bs-target="#addUpdateMasterModal" (click)="selectItemToAdd()">
+                                                <i class="fi fi-rr-add"></i>
+                                                <span class="ms-2">
+                                                    Add {{masterName}}
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <!-- Pagination Controls -->
+                                        <pagination-controls
+                                            id="roles_list"
+                                            (pageChange)="p = $event; getData()">
+                                        </pagination-controls>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of data | paginate: { id: 'roles_list', itemsPerPage: limit, currentPage: p, totalItems: total }; let i = index">
+                                                    <td>{{ i + 1 }}</td>
+                                                    <td>{{ item.name }}</td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary btn-sm me-2"
+                                                            (click)="selectItemToEdit(i)">
+                                                            <i class="fi fi-rr-pencil"></i> Edit
+                                                        </button>
+                                                        <button class="btn btn-outline-danger btn-sm"
+                                                            (click)="deleteItem(i)">
+                                                            <i class="fi fi-rr-trash"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

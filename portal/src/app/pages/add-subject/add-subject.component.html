@@ -1,0 +1,152 @@
+<!-- Modal for Add/Update Subject -->
+<div class="modal fade" [ngClass]="{'show': isEdit}" id="addUpdateSubjectModal" tabindex="-1"
+    aria-labelledby="addUpdateSubjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUpdateSubjectModalLabel">{{ isEdit == 'Update' ? 'Update' : 'Add' }} Subject
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="isEdit=undefined"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group mt-3">
+                                <label for="subjectClass" class="form-label">Class</label>
+                                <select id="subjectClass" class="form-control" [(ngModel)]="masterToAddOrEdit.class">
+                                    <option value="" disabled>Select a class</option>
+                                    <option *ngFor="let classItem of class" [value]="classItem._id">{{ classItem.name }}</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Name -->
+                            <div class="form-group">
+                                <label for="subjectName" class="form-label">Name</label>
+                                <input id="subjectName" class="form-control" [(ngModel)]="masterToAddOrEdit.name"
+                                    name="subjectName" type="text" placeholder="Name" />
+                            </div>
+                            <!-- Description -->
+                            <div class="form-group mt-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea id="description" class="form-control" [(ngModel)]="masterToAddOrEdit.description"
+                                    name="description" placeholder="Description"></textarea>
+                            </div>
+                            <!-- Image -->
+                            <div class="form-group mt-3">
+                                <label for="subjectImage" class="form-label">Image</label>
+                                <input id="subjectImage" class="form-control"
+                                    name="subjectImage" type="file" (change)="onImageSelect($event)" accept="uploads/*"/>
+                            </div>
+                            
+                          
+                           
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="isEdit=undefined">Close</button>
+                <button *ngIf="isEdit == 'Add'" type="button" class="btn btn-primary" (click)="addNewItem()">
+                    Add
+                </button>
+                <button *ngIf="isEdit == 'Update'" type="button" class="btn btn-primary"
+                    (click)="editItem(masterToAddOrEditIndex)">
+                    Update
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Subject Management -->
+<div class="row">
+    <div class="col-12 col-md">
+        <div class="row">
+            <div class="col">
+                <!-- Card -->
+                <div class="card bg-white">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <h2>
+                                {{masterName}} Management
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Add Subject Button -->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                                        <div>
+                                            <button class="btn btn-primary w-100 w-md-auto" data-bs-toggle="modal"
+                                                data-bs-target="#addUpdateSubjectModal" (click)="selectItemToAdd()">
+                                                <i class="fi fi-rr-add"></i>
+                                                <span class="ms-2">
+                                                    Add {{masterName}}
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Subject List with Pagination -->
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <!-- Pagination Controls -->
+                                        <pagination-controls id="subject_list" (pageChange)="p = $event; getData()">
+                                        </pagination-controls>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Description</th>
+                                                    <th>Class</th>
+                                                    <th>Image</th>
+                                                    <th>Actions</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let subjectItem of data | paginate: { id: 'subject_list', itemsPerPage: limit, currentPage: p, totalItems: total }; let i = index">
+                                                    <td>{{ i + 1 }}</td>
+                                                    <td>{{ subjectItem.name }}</td>
+                                                    <td>{{ subjectItem.description }}</td>
+                                                    <td>{{ subjectItem.classDetails.name }}</td>
+                                                    <td>
+                                                        <img *ngIf="subjectItem.image" [src]="'/api/files/download/'+subjectItem.image" alt="{{subjectItem.name}}" style="width: 100px; height: 100px;" />
+                                                        <span *ngIf="!subjectItem.image">No Image</span>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary btn-sm me-2"
+                                                            (click)="selectItemToEdit(i)">
+                                                            <i class="fi fi-rr-pencil"></i> Edit
+                                                        </button>
+                                                        <button class="btn btn-outline-danger btn-sm"
+                                                            (click)="deleteItem(i)">
+                                                            <i class="fi fi-rr-trash"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="row mb-2">
+    <div class="col-12 col-lg-4 mb-4">
+        <div class="cardcontainer">
+            <div class="photo">
+                <img
+                    src="https://images.unsplash.com/photo-1657548951227-fd776f7b96ab?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                <div class="photos">Course</div>
+            </div>
+            <div class="content">
+                <p class="txt4">English Literature</p>
+                <p class="txt5">Understanding classic and modern texts</p>
+                <p class="txt2">Explore key themes, characters, and stylistic elements in English literature, from
+                    Shakespeare to contemporary works.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="container course-details bg-white">
+                    <h1>English Literature Course</h1>
+                    <p class="description">
+                        Welcome to the English Literature course! This course explores classic and modern texts, key themes, characters, and literary techniques. Whether you're a beginner or an advanced learner, this course will enhance your understanding and appreciation of English literature.
+                    </p>
+
+                    <h2>Course Outline</h2>
+                    <ul>
+                        <li>Introduction to English Literature</li>
+                        <li>Exploring Literary Genres: Poetry, Drama, Fiction</li>
+                        <li>Key Themes in Literature: Love, Conflict, Identity</li>
+                        <li>Study of Major Works: Shakespeare, Jane Austen, Charles Dickens</li>
+                        <li>Literary Criticism and Analysis</li>
+                    </ul>
+
+                    <h2>Instructor</h2>
+                    <p class="instructor-details">
+                        <strong>Instructor:</strong> Dr. Emily Turner <br>
+                        <strong>Experience:</strong> 10+ years in teaching English Literature <br>
+                        <strong>Education:</strong> Ph.D. in English Literature from Oxford University
+                    </p>
+
+                    <h2>Course Duration</h2>
+                    <p>
+                        This is a 12-week course with weekly classes.
+                    </p>
+
+                    <h2>Booking Your Class</h2>
+                    <p>
+                        Select a preferred date and time slot to book your class.
+                    </p>
+
+                    <div class="booking-section">
+                        <form action="/submit-booking" method="POST">
+                            <div class="form-group">
+                                <label for="date">Select Date:</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="time-slot">Select Time Slot:</label>
+                                <select id="time-slot" name="time-slot" required>
+                                    <option value="" disabled selected>Select a time slot</option>
+                                    <option value="9am-11am">9:00 AM - 11:00 AM</option>
+                                    <option value="11am-1pm">11:00 AM - 1:00 PM</option>
+                                    <option value="2pm-4pm">2:00 PM - 4:00 PM</option>
+                                    <option value="4pm-6pm">4:00 PM - 6:00 PM</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Book Class</button>
+                        </form>
+                    </div>
+
+                    <h2>Course Fees</h2>
+                    <p>
+                        The course fee is $200, which covers all materials and access to additional resources.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

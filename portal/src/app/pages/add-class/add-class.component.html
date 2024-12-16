@@ -1,0 +1,138 @@
+<!-- modal for add/update -->
+<div class="modal fade" [ngClass]="{'show': isEdit}" id="addUpdateClassModal" tabindex="-1"
+    aria-labelledby="addUpdateClassModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUpdateClassModalLabel">{{ isEdit == 'Update' ? 'Update' : 'Add' }} Class
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="isEdit=undefined"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="className" class="form-label">Name</label>
+                                <input id="className" class="form-control" [(ngModel)]="masterToAddOrEdit.name"
+                                    name="className" type="text" placeholder="Name" />
+                            </div>
+                            <!-- Description -->
+                            <div class="form-group">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea id="description" class="form-control" [(ngModel)]="masterToAddOrEdit.description"
+                                    name="description" placeholder="Description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="image" class="form-label">Upload Image</label>
+                                <input type="file" id="image" class="form-control" (change)="onImageSelected($event)" accept="uploads/*">
+                              </div>
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="isEdit=undefined">Close</button>
+                <button *ngIf="isEdit == 'Add'" type="button" class="btn btn-primary" (click)="addNewItem()">
+                    Add
+                </button>
+                <button *ngIf="isEdit == 'Update'" type="button" class="btn btn-primary"
+                    (click)="editItem(masterToAddOrEditIndex)">
+                    Update
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- class management -->
+<div class="row">
+    <div class="col-12 col-md">
+        <div class="row">
+            <div class="col">
+                <!-- Date time card -->
+                <div class="card bg-white">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <h2>
+                                {{masterName}} Management
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Classes -->
+                        <div class="container">
+                            <!-- selectable chips/badges for classes -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                                        <div>
+                                            <button class="btn btn-primary w-100 w-md-auto" data-bs-toggle="modal"
+                                                data-bs-target="#addUpdateClassModal" (click)="selectItemToAdd()">
+                                                <i class="fi fi-rr-add"></i>
+                                                <span class="ms-2">
+                                                    Add {{masterName}}
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <!-- Pagination Controls -->
+                                        <pagination-controls
+                                            id="classes_list"
+                                            (pageChange)="p = $event; getData()">
+                                        </pagination-controls>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Description</th>
+                                                    <th>Image</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let classItem of data | paginate: { id: 'classes_list', itemsPerPage: limit, currentPage: p, totalItems: total }; let i = index">
+                                                    <td>{{ i + 1 }}</td>
+                                                    <td>{{ classItem.name }}</td>
+                                                    <td>{{ classItem.description }}</td>
+                                                    <td>
+                                                        <img *ngIf="classItem.image" [src]="'/api/files/download/'+classItem.image" alt="{{classItem.name}}" style="width: 100px; height: 100px;" />
+                                                        <span *ngIf="!classItem.image">No Image</span>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary btn-sm me-2"
+                                                            (click)="selectItemToEdit(i)">
+                                                            <i class="fi fi-rr-pencil"></i> Edit
+                                                        </button>
+                                                        <button class="btn btn-outline-danger btn-sm"
+                                                            (click)="deleteItem(i)">
+                                                            <i class="fi fi-rr-trash"></i> Delete
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="assets/logos/logo-square.png" alt="logo" class="wide-logo" [style.width]="'50px'">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <h2 class="text-white m-0">Ankurshala</h2>
+                    <p class="text-white m-0 fw-bold">On Demand Learning</p>
+                </li>
+            </ul>
+        </div>
+        <form class="d-flex">
+            <div>
+                <div class="text-end mb-1">
+                    <a class="px-2 text-light" [style.textDecoration]="'none'">
+                        <img src="assets/icons/horn.png" alt="horn" [style.width]="'20px'" class="pe-2">
+                        Support
+                    </a>
+                    <a class="px-2 text-light" [style.textDecoration]="'none'">
+                        <img src="assets/icons/faq.png" alt="question" [style.width]="'20px'" class="pe-2">
+                        FAQ
+                    </a>
+                </div>
+                <div>
+                    <a [routerLink]="['/login']" class="btn btn-sm btn-light border border-info text-info me-2 py-2" [style.width]="'115px'">
+                        <i class="fa fa-key" aria-hidden="true"></i> |
+                        Log In
+                    </a>
+                    <a [routerLink]="['/join-in']" routerLinkActive="router-link-active"  class="btn btn-sm btn-info border border-white text-white me-2 py-2" [style.width]="'115px'">
+                        <i class="fa fa-handshake-o" aria-hidden="true"></i> |
+                        JOIN IN
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</nav>

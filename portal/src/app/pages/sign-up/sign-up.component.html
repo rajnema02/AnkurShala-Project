@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card login-form-container bg-white">
+            <div class="card-title border-bottom text-center mt-3 text-secondary">
+                <h4 class="fs-2">Sign Up</h4>
+                <p class="fw-bold">Create an account as a new client.</p>
+            </div>
+            <div class="card-body p-5 pt-4">
+                <form #signUpForm="ngForm" (ngSubmit)="submitSignUp(signUpForm)">
+                    <div class="form-group mb-3">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="signUp.name" name="fullName" id="fullName" required>
+                        <span class="invalid-feedback">
+                            Name is required
+                        </span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email">Email/Mobile No.</label>
+                        <input type="email" class="form-control" [(ngModel)]="signUp.email" name="email" id="email" autocomplete="email" required>
+                        <span class="invalid-feedback">
+                            Email is required
+                        </span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" [(ngModel)]="signUp.password" name="password" id="password" autocomplete="current-password"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        required>
+                        <span class="invalid-feedback">
+                            {{
+                                signUp.password ?
+                                'At least 8 characters, one uppercase, one lowercase, and one number required':
+                                'Password is required'
+                            }}
+                        </span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" [(ngModel)]="signUp.confirmPassword" name="confirmPassword" id="confirmPassword" autocomplete="current-password"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        required>
+                        <span class="invalid-feedback">
+                            {{ signUp.confirmPassword ? 'Passwords do not match' : 'Confirm password is required' }}
+                        </span>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-primary w-100 mt-3">Sign Up</button>
+                </form>
+                <span class="invalid-feedback">
+                    Please fill out all required fields
+                </span>
+                <div class="mt-1">
+                    Already have an account? <a routerLink="/login" class="c-primary fw-bold">Log In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

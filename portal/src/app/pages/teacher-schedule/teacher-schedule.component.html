@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="card shadow-sm">
+      <div class="card-header text-center bg-primary text-white">
+          <h3>Available Time</h3>
+      </div>
+      <div class="card-body">
+          <form>
+              <div class="form-row d-flex align-items-center">
+                  <div class="form-group col-md-5">
+                      <label for="start-time">Start Time</label>
+                      <input type="time" class="form-control" id="start-time" name="start-time" [(ngModel)]="Details.start_time">
+                  </div>
+                  <div class="form-group col-md-5" style="margin-left: 20px">
+                      <label for="end-time">End Time</label>
+                      <input type="time" class="form-control" id="end-time" name="end-time" [(ngModel)]="Details.end_time">
+                  </div>
+              </div>
+
+              <div class="row pt-4">
+                <div class="col-md-3 mb-3" *ngFor="let class of data; let i = index">
+                    <button type="button" class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center" (click)="toggleList(i)">
+                      {{ class.classDetails.name }} <span class="icon">{{ showList[i] ? '-' : '+' }}</span>
+                    </button>
+
+                    <!-- <ul *ngIf="showList[i]" class="list-group mt-2">
+                        <li class="list-group-item d-flex align-items-center" *ngFor="let subject of class.subjects; let j = index">
+                            <span class="ms-2 me-2">{{ j + 1 }}. {{ subject.subjectDetails.name }}</span>
+                            <input
+                            type="checkbox"
+                            (change)="toggleSelection(subject)"
+                        />
+                        </li>
+                    </ul> -->
+                    <ul *ngIf="showList[i]" class="list-group mt-2">
+                      <li class="list-group-item d-flex align-items-center" *ngFor="let subject of class.subjectDetails; let j = index">
+                        <span class="ms-2 me-2">{{ j + 1 }}. {{ subject.name }}</span>
+                        <input
+                          type="checkbox"
+                          (change)="toggleSelection(subject)"
+                        />
+                      </li>
+                    </ul>
+                  </div>
+            </div>
+
+              <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-primary" (click)="saveData()">Submit</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header text-center bg-primary text-white">
+      <h3>Posted Schedules</h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped text-center">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Class</th>
+            <th>Subjects</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let schedule of teacherSchedule  let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ schedule.start_time }}</td>
+            <td>{{ schedule.end_time }}</td>
+            <td>{{ schedule.classDetails.name }}</td>
+            <td>
+              <ul style="list-style-type: none" >
+                <li *ngFor="let subject of schedule.subjectDetails">{{ subject.name }}</li>
+              </ul>
+            </td>
+            <td>
+              <button class="btn btn-primary mx-3" >Edit</button>
+              <button class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

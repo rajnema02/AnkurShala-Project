@@ -1,0 +1,17 @@
+@media (max-width: 767px) {
+    .login-form-container {
+        min-width: 100%;
+    }
+}
+@media (min-width: 768px) {
+    .login-form-container {
+        min-width: 450px;
+    }
+}
+.login-form-container {
+    margin: 5% auto;
+}
+
+img.logo {
+    width: 100px;
+}

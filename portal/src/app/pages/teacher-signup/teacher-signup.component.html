@@ -1,0 +1,175 @@
+<!-- modal for add/update -->
+<div class="modal fade" [ngClass]="{'show': isOTPSent}" id="addUpdateMasterModal" tabindex="-1"
+    aria-labelledby="addUpdateMasterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUpdateMasterModalLabel">
+                    Verify OTP
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="isOTPSent=false"></button>
+            </div>
+            <div class="modal-body">
+                <form class="container" #teacherOtpForm="ngForm">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="otp" class="form-label">OTP</label>
+                                <input id="otp" class="form-control" ngModel
+                                    name="otp" type="text" placeholder="OTP" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="isOTPSent=false">Close</button>
+                <button type="button" class="btn btn-primary" (click)="verifyOTP(teacherSignUpForm, teacherOtpForm)">
+                    Verify
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row" style="width: 100%; height: 100vh; display: flex;">
+    <div class="sec-1 col-md-8" style="background-color: rgb(0, 83, 138);">
+        <div class="part-1 text-white" style="margin-left: 12vw; position: relative;">
+            <div class="logo d-flex mt-3">
+                <a
+                    [routerLink]="['/']"
+                >
+                    <img style="margin-bottom: 3vh; height: 11vh; " src="assets/logos/logo-wide.png" alt="Ankurshala logo" />
+                </a>
+            </div>
+
+            <h1 style="margin-top: 26vh; font-size: 4vw;">Tell Us More</h1>
+            <h1 style="font-size: 4vw;">About You</h1>
+            <img id="img1" style="position: absolute; top: 104%; left: -23%; width: 38vw;" src="assets/logos/undraw_Graduation_re_gthn-removebg-preview 1.png" alt="Graduation illustration" />
+        </div>
+        <div class="part-2">
+            <img id="img2" style="position: absolute; top: 1%; left: 41%; width: 32vw;" src="assets/logos/Frame (27).png" alt="Certificate illustration" />
+        </div>
+    </div>
+    <div class="sec-2 col-md-4 d-flex flex-column align-items-center justify-content-center bg-white" style="height: 100vh;">
+        <div class="part-1 w-100 p-3" style="max-width: 400px;">
+            <div class="image text-center mb-3">
+                <img id="img3" class="animate__animated animate__fadeIn" style="height: 12vh;" src="assets/logos/undraw_Teacher_re_sico 1.png" alt="teacher" />
+                <h3 style="font-size: 2.5rem;" class="animate__animated animate__fadeInUp">Teacher</h3>
+                <div>
+                    <nav class="selection-nav nav justify-content-center">
+                        <a class="nav-link" [routerLink]="['/teacher-signup']">teacher</a>
+                        <a class="nav-link" [routerLink]="['/guardian-signup']">Guardian</a>
+                        <a class="nav-link disabled" [routerLink]="['/teacher-signup']">Teacher</a>
+                    </nav>
+                </div>
+            </div>
+            <h5 class="text-center" style="font-size: 1.5rem;">Sign Up</h5>
+            <form class="animate__animated animate__fadeIn" #teacherSignUpForm="ngForm">
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Email*" name="email" required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);"
+                        ngModel
+                        name="email"
+                    />
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="First Name*"  required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);"
+                            ngModel
+                            name="first_name"
+                        />
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Last Name*"  required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);"
+                            ngModel
+                            name="last_name"
+                        />
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Preferred Subject*" name="Preferred Subject" required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);"
+                        ngModel
+                        name="preferred_subject"
+                    />
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Manageable Subject*" name="Manageable Subject" required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);"
+                        ngModel
+                        name="manageable_subject"
+                    />
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Highest Education Qualification*" name="Qualification" required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);"
+                        ngModel
+                        name="highest_qualification"
+                    />
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" name="board" required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);"
+                        ngModel
+                        name="board_name"
+                    >
+                        <option value="" disabled selected>Select Board*</option>
+                        <option value="Mp Board">Mp Board</option>
+                        <option value="CBSE">CBSE</option>
+                    </select>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="dob" class="form-label">Date of Birth*</label>
+                        <input type="date" class="form-control" name="dob" required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);"
+                            ngModel
+                            name="dob"
+                            min="1980-01-01"
+                            max="2004-01-01"
+                        />
+                    </div>
+                    <div class="col">
+                        <label for="mobileNumber" class="form-label">Mobile Number*</label>
+                        <input type="number" class="form-control" placeholder="+91 Mobile Number" name="mobileNumber" required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);"
+                            ngModel
+                            name="mobileNumber"
+                            min="6000000000"
+                            max="9999999999"
+                        />
+                    </div>
+                </div>
+                <!-- password, confirm_password -->
+                <div class="mb-3">
+                    <input ngModel type="password" name="password" class="form-control" placeholder="Password*" name="password" required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);" />
+                </div>
+                <div class="mb-3">
+                    <input ngModel type="password" name="confirm_password" class="form-control" placeholder="Confirm Password*" name="confirmPassword" required style="font-size: 1.1rem; background-color: white; border: none; border-bottom: 0.1px solid rgba(72, 71, 71, 0.29);" />
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" required ngModel class="form-check-input" id="termsCheck" name="terms" required />
+                    <label class="form-check-label small" for="termsCheck" style="font-size: 1rem;">
+                        By signing up, you are agreeing to our terms of use and privacy policy.
+                    </label>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="button" (click)="sendOTP(teacherSignUpForm)" class="btn rounded-5 mx-3" style="width: 100%; background-color: rgb(79, 189, 244); font-size: 1.2rem;"
+                        [disabled]="!teacherSignUpForm.valid"
+                    >
+                        Initiate Verification
+                    </button>
+                    <a [routerLink]="['/join-in']" routerLinkActive="router-link-active"  class="btn rounded-5" style="width: 100%; background-color: rgb(79, 189, 244); font-size: 1.2rem;">
+                        Contact Us
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="part-3 d-flex align-items-center justify-content-evenly w-100 mt-3" id="footer">
+            <p class="text-secondary m-0" style="font-size: 0.9rem;">©2023 Ankurshala</p>
+            <p class="text-secondary m-0" style="font-size: 0.9rem;">Privacy</p>
+            <p class="text-secondary m-0" style="font-size: 0.9rem;">Cookie preferences</p>
+        </div>
+    </div>
+
+</div>

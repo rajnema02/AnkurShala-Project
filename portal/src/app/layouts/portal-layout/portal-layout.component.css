@@ -1,0 +1,10 @@
+.main-body {
+    margin-top: 70px;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+}
+@media (min-width: 768px) {
+    .main-body {
+        margin-left: 250px;
+    }
+}

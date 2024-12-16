@@ -1,0 +1,32 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 70px !important;
+    padding: 20px;
+    z-index: 999;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+@media (min-width: 767px) {
+    .header {
+        margin-left: 250px;
+        width: calc(100% - 250px);
+    }
+}
+@media (max-width: 767px) {
+    .header {
+        width: 100%;
+    }
+}
+i.fi {
+    position: relative;
+    top: 2px;
+}
+.notifications-card {
+    min-width: 350px;
+}
+@media screen and (max-width: 768px) {
+    .dropdown-menu[aria-labelledby="dropdownMenu1"] {
+        left: -190px !important;
+    }
+}

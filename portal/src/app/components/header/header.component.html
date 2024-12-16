@@ -1,0 +1,69 @@
+<div class="header border-bottom px-3 bg-white">
+    <div class="row">
+        <div class="col-auto">
+            <a class="btn text-secondary me-3" (click)="toggleSidebar.emit()">
+                <!-- <i class="fi fi-rr-menu-burger fs-5"></i> -->
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </a>
+            <a class="btn text-secondary me-3" (click)="toggleTheme()">
+                <!-- <i class="fi fi-rr-moon fs-5"></i>
+                <i class="fi fi-rr-sun fs-5"></i> -->
+                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                <!-- <i class="fa fa-moon-o" aria-hidden="true"></i> -->
+            </a>
+        </div>
+        <div class="col text-end">
+            <!-- <div ngbDropdown display="dynamic" class="d-inline-block ms-3">
+                <button class="btn btn-flat" id="dropdownMenu1" ngbDropdownToggle>
+                    <i class="fi fi-rr-bell fs-5"></i>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenu1" class="dropdown-menu border-0">
+                    <div class="card notifications-card">
+                        <div class="card-header bottom-border bg-transparent">
+                            <div class="row">
+                                <div class="col">
+                                    Notifications
+                                </div>
+                                <div class="col text-end">
+                                    <a class="text-primary">
+                                        Mark all as read
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            No notifications found.
+                        </div>
+                        <div class="card-footer">
+                            <a class="d-inline-block w-100 text-center text-primary">
+                                View all
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div ngbDropdown class="d-inline-block ms-3">
+                <button class="btn no-hover btn-flat" id="dropdownMenu2" ngbDropdownToggle>
+                    <span class="p-2 text-secondary bg-light rounded-circle">{{ getInitials() | uppercase }}</span>
+                    <span class="text-dark">
+                        {{ getCurrentUser()?.name }}
+                    </span>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" routerLink="/profile">
+                        <i class="fi fi-rr-user"></i>
+                        <span class="ms-2">Profile</span>
+                    </button>
+                    <button class="dropdown-item" routerLink="/settings">
+                        <i class="fi fi-rr-settings"></i>
+                        <span class="ms-2">Settings</span>
+                    </button>
+                    <button class="dropdown-item" (click)="logout()">
+                        <i class="fi fi-rr-power"></i>
+                        <span class="ms-2">Logout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

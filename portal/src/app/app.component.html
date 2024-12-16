@@ -1,0 +1,17 @@
+@if (getIsLoading()) {
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+}
+
+<div class="toastr-container">
+    <ngb-toast *ngFor="let toast of getToasts()" [header]="toast.header" [autohide]="true" [delay]="toast.delay" [class]="toast.classname" (hidden)="removeToast(toast)">
+        <ng-template ngbToastHeader>
+            <strong>{{ toast.header }}</strong>
+        </ng-template>
+        Message: {{ toast.body }}
+    </ngb-toast>
+</div>
+
+<router-outlet></router-outlet>
+

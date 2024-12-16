@@ -1,0 +1,102 @@
+<div class="container my-4">
+    <div class="d-flex align-items-center overflow-auto">
+        <div *ngFor="let item of data; let i = index" 
+            (click)="selectClass(item)" 
+            [ngClass]="{
+                'bg-dark text-white': selectedClass === item,
+                'bg-light text-dark': selectedClass !== item
+            }" 
+            class="badge rounded-pill p-3 me-2 text-center" 
+            style="min-width: 150px; cursor: pointer;">
+            <div>{{ item.name }}</div>
+            <small [ngClass]="{
+                    'text-white-50': selectedClass === item,
+                    'text-muted': selectedClass !== item
+                }" *ngIf="item.learners">
+                {{ item.learners }}+ learners
+            </small>
+        </div>
+    </div> 
+</div>
+
+<div class="container my-4">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col" *ngFor="let subj of filteredSubjects">
+            <div class="card h-100" (click)="goToChaptersPage(subj._id)">
+                <img *ngIf="subj.image" [src]="'/api/files/download/'+subj.image" alt="{{subj.name}}"
+                    class="card-img-top" style="height: 180px;" />
+                <div class="card-body">
+                    <h6 class="card-title">{{ subj.name }}</h6>
+                    <p class="card-text text-muted small">{{ subj.description || 'Instructor Name' }}</p>
+                    <p class="card-text">
+                        <span class="text-warning">{{ subj.rating || 'N/A' }}</span>
+                        <span class="text-warning" *ngIf="subj.rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        <span class="text-muted">({{ subj.reviewsCount || '0' }})</span>
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold">{{ subj.price | currency: 'INR' }}</span>
+                        <del class="text-muted" *ngIf="subj.originalPrice">{{ subj.originalPrice | currency: 'INR' }}</del>
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <span *ngIf="subj.isBestseller" class="badge bg-success">Bestseller</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="selectedSubjectId">
+    <app-student-chapter  [subjectId]="selectedSubjectId" ></app-student-chapter>
+</div>
+
+<!-- 
+
+<div class="container my-4">
+    <div class="d-flex align-items-center overflow-auto">
+        <div *ngFor="let item of data; let i = index" (click)="selectClass(item)" [ngClass]="{
+                'bg-dark text-white': selectedClass === item,
+                'bg-light text-dark': selectedClass !== item
+            }" class="badge rounded-pill p-3 me-2 text-center" style="min-width: 150px; cursor: pointer;">
+            <div>{{ item.name }}</div>
+            <small [ngClass]="{
+                    'text-white-50': selectedClass === item,
+                    'text-muted': selectedClass !== item
+                }"
+                *ngIf="item.learners"
+            >
+                {{ item.learners }}+ learners
+            </small>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container my-4">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col" *ngFor="let subj of filteredSubjects">
+            <div class="card h-100">
+                <img *ngIf="subj.image" [src]="'/api/files/download/'+subj.image" alt="{{subj.name}}"
+                    class="card-img-top" style="height: 180px;" />
+                <div class="card-body">
+                    <h6 class="card-title">{{ subj.name }}</h6>
+                    <p class="card-text text-muted small">{{ subj.description || 'Instructor Name' }}</p>
+                    <p class="card-text">
+                        <span class="text-warning">{{ subj.rating || 'N/A' }}</span>
+                        <span class="text-warning" *ngIf="subj.rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        <span class="text-muted">({{ subj.reviewsCount || '0' }})</span>
+                    </p>
+                    <p class="card-text">
+                        <span class="fw-bold">{{ subj.price | currency: 'INR' }}</span>
+                        <del class="text-muted" *ngIf="subj.originalPrice">{{ subj.originalPrice | currency: 'INR'
+                            }}</del>
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <span *ngIf="subj.isBestseller" class="badge bg-success">Bestseller</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

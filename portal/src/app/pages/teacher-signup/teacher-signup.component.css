@@ -1,0 +1,101 @@
+html,body{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+   }
+   
+   /* front.jsx */
+  @media (max-width: 1200px) {
+      .frontSec {
+          width: 50%
+        }
+        .frontOne {
+          width: 50%; 
+          
+  
+      }
+       
+    }
+  @media (max-width: 1000px) {
+      .frontSec {
+          width: 100%
+        }
+        .frontOne {
+          width: 100%; 
+          
+  
+      }
+       
+    }
+  @media (max-width: 768px) {
+       .secCard{
+            display: flex;
+            flex-direction: row;
+       }
+       #img1{
+        display:none;
+       }
+       #img2{
+        display:none;
+       }
+       .sec-1 .part-1 h1{
+        display:none;
+       }
+       
+    }
+    @media (max-width: 425px) {
+      .secCard {
+        display: flex;
+        flex-direction: row; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+      }
+    
+      .secCard .row {
+        width: 100%;
+        margin: 0; 
+      }
+    
+      .secCard .col-md-8,
+      .secCard .col-md-6 {
+        flex: 1 0 21%;
+        margin: 5px;
+        box-sizing: border-box; 
+      }
+      .designedCard{
+          margin:0%;
+      }
+      
+    }
+  
+    /* main.jsx */
+  
+  
+  
+  
+  @media (max-width: 768px) {
+    .card {
+      padding: 5px; 
+    }
+    .input-group input {
+      font-size: 0.8rem; 
+    }
+    h5, h6 {
+      font-size: 1rem; 
+    }
+  }
+  
+  @media (max-width: 576px) {
+      .input-group input {
+        font-size: 0.7rem; 
+      }
+      .btn {
+        font-size: 0.8rem;
+        padding: 5px; 
+      }
+      h5, h6 {
+        font-size: 0.9rem; 
+      }
+    }
+  
+  

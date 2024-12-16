@@ -1,0 +1,285 @@
+<!-- Modal for Add/Update Topic -->
+<div
+  class="modal fade"
+  [ngClass]="{ show: isEdit }"
+  id="addUpdateTopicModal"
+  tabindex="-1"
+  aria-labelledby="addUpdateTopicModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addUpdateTopicModalLabel">
+          {{ isEdit == "Update" ? "Update" : "Add" }} Topic
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="isEdit = undefined"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+           
+              <div class="form-group mt-3">
+                <label for="topicClass" class="form-label">Class</label>
+                <select
+                  id="topicClass"
+                  class="form-control"
+                  [(ngModel)]="masterToAddOrEdit.class"
+                  (change)="onClassChange($event)"
+                >
+                  <option value="" disabled>Select a class</option>
+                  <option
+                    *ngFor="let classItem of class"
+                    [value]="classItem._id"
+                  >
+                    {{ classItem.name }}
+                  </option>
+                </select>
+              </div>
+              <!-- Subject -->
+
+              <div class="form-group mt-3">
+                <label for="topicSubject" class="form-label">Subject</label>
+                <select
+                  id="topicSubject"
+                  class="form-control"
+                  [(ngModel)]="masterToAddOrEdit.subject"
+                  (change)="onSubjectChange($event)"
+                >
+                  <option value="" disabled>Select a subject</option>
+                  <option
+                    *ngFor="let subjectItem of subjectList"
+                    [value]="subjectItem._id"
+                  >
+                    {{ subjectItem.name }}
+                  </option>
+                </select>
+              </div>
+              
+
+              <!-- duration -->
+              <div class="form-group mt-3">
+                <label for="timeDuration" class="form-label">Time Duration (minutes)</label>
+                <input
+                  id="timeDuration"
+                  type="time"
+                  class="form-control"
+                  [(ngModel)]="masterToAddOrEdit.duration"
+                  
+                  placeholder="Enter duration in minutes"
+                  min="0"
+                />
+              </div>
+              
+
+              <!-- Chapter selection -->
+              <div class="form-group mt-3">
+                <label for="topicChapter" class="form-label">Chapter</label>
+                <select
+                  id="topicChapter"
+                  class="form-control"
+                  [(ngModel)]="masterToAddOrEdit.chapter"
+                >
+                  <option value="" disabled>Select a chapter</option>
+                  <option
+                    *ngFor="let chapterItem of chapterList"
+                    [value]="chapterItem._id"
+                  >
+                    {{ chapterItem.name }}
+                  </option>
+                </select>
+              </div>
+
+              <!-- Name -->
+              <div class="form-group mt-3">
+                <label for="topicName" class="form-label">Name</label>
+                <input
+                  id="topicName"
+                  class="form-control"
+                  [(ngModel)]="masterToAddOrEdit.name"
+                  name="topicName"
+                  type="text"
+                  placeholder="Name"
+                />
+              </div>
+
+              <!-- Description -->
+              <div class="form-group mt-3">
+                <label for="topicDescription" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  id="topicDescription"
+                  class="form-control"
+                  [(ngModel)]="masterToAddOrEdit.description"
+                  name="description"
+                  placeholder="Description"
+                ></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <label for="topicSummery" class="form-label"
+                  >Summary</label
+                >
+                <textarea
+                  id="topicSummery"
+                  class="form-control"
+                  [(ngModel)]="masterToAddOrEdit.summary"
+                  name="summary"
+                  placeholder="Summary"
+                ></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <label for="topicImage" class="form-label">Image</label>
+                <input id="topicImage" class="form-control"
+                    name="topicImage" type="file" (change)="onImageSelect($event)" accept="uploads/*"/>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="isEdit = undefined"
+        >
+          Close
+        </button>
+        <button
+          *ngIf="isEdit == 'Add'"
+          type="button"
+          class="btn btn-primary"
+          (click)="addNewItem()"
+        >
+          Add
+        </button>
+        <button
+          *ngIf="isEdit == 'Update'"
+          type="button"
+          class="btn btn-primary"
+          (click)="editItem(masterToAddOrEditIndex)"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Topic Management -->
+<div class="row">
+  <div class="col-12 col-md">
+    <div class="row">
+      <div class="col">
+        <!-- Card -->
+        <div class="card bg-white">
+          <div class="card-header">
+            <div class="d-flex justify-content-center align-items-center">
+              <h2>Topic Management</h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Add Topic Button -->
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <div
+                    class="d-flex flex-column flex-md-row justify-content-between"
+                  >
+                    <div>
+                      <button
+                        class="btn btn-primary w-100 w-md-auto"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addUpdateTopicModal"
+                        (click)="selectItemToAdd()"
+                      >
+                        <i class="fi fi-rr-add"></i>
+                        <span class="ms-2">Add Topic</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Topic List with Pagination -->
+              <div class="row mt-3">
+                <div class="col-12">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <!-- Pagination Controls -->
+                    <pagination-controls
+                      id="topic_list"
+                      (pageChange)="p = $event; getData()"
+                    ></pagination-controls>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Name</th>
+                          <th>Class</th>
+                          <th>Subject</th>
+                          <th>Duration</th>
+                          <th>Image</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="
+                            let topicItem of data
+                              | paginate
+                                : {
+                                    id: 'topic_list',
+                                    itemsPerPage: limit,
+                                    currentPage: p,
+                                    totalItems: total
+                                  };
+                            let i = index
+                          "
+                        >
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ topicItem.name }}</td>
+                          <td>{{ topicItem.classDetails.name }}</td>
+                          <td>{{ topicItem.subjectDetails.name }}</td>
+                          <td>{{ topicItem.duration}} hours</td>
+                          <td>
+                            <img *ngIf="topicItem.image" [src]="'/api/files/download/'+topicItem.image" alt="{{topicItem.name}}" style="width: 100px; height: 100px;" />
+                            <span *ngIf="!topicItem.image">No Image</span>
+                        </td>
+                          <td>
+                            <button
+                              class="btn btn-outline-primary btn-sm me-2"
+                              (click)="selectItemToEdit(i)"
+                            >
+                              <i class="fi fi-rr-pencil"></i> Edit
+                            </button>
+                            <button
+                              class="btn btn-outline-danger btn-sm"
+                              (click)="deleteItem(i)"
+                            >
+                              <i class="fi fi-rr-trash"></i> Delete
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

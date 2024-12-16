@@ -1,0 +1,11 @@
+<div class="row m-0 p-0">
+    <div class="col-auto m-0 p-0">
+        <app-sidebar (toggleSidebar)="toggleSidebar()"></app-sidebar>
+    </div>
+    <div class="col m-0 p-0">
+        <app-header (toggleSidebar)="toggleSidebar()"></app-header>
+        <main class="main-body p-3">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>

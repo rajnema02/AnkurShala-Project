@@ -1,0 +1,34 @@
+<div class="sidebar-container">
+    <div id="sidebar" class="sidebar border-end bg-white">
+        <div class="logo-container position-relative">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="/assets/logos/logo-wide.png" alt="logo" [className]="'wide-logo w-100'">
+                <!-- <img src="assets/logos/ayodhya-logo.jpg" alt="logo" class="w-100"> -->
+                <!-- <img src="https://www.sensecure.in/img/Sensecure%20logo.png" alt="logo"> -->
+            </div>
+            <div class="sidebar-close-btn position-absolute d-md-none"
+                style="top: 0; right: 10px;"
+            >
+                <button class="btn btn-flat" (click)="toggleSidebar.emit()">
+                    <!-- <i class="fi fi-rr-angle-left"></i> -->
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="navigation-elements">
+            <div class="list-group">
+                @for (menuItem of getMenuItems(); track $index) {
+                    <a
+                        [routerLink]="menuItem.link"
+                        (click)="toggleSidebar.emit()"
+                        routerLinkActive="active"
+                        class="list-group-item list-group-item-action fs-5 fw-bold">
+                        <!-- <i class="fi {{ menuItem.icon }}"></i> -->
+                        <i class="fa {{ menuItem.icon }}" aria-hidden="true"></i>
+                        <span class="ms-2">{{ menuItem.title }}</span>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
